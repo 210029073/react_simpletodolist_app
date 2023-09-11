@@ -4,7 +4,45 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function About() {
+var Person = function (firstName, lastName, email, phoneNumber) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.email = email;
+  this.phoneNumber = phoneNumber;
+};
+
+var contacts = [];
+
+function Data() {
+  contacts = [];
+  contacts.push(
+    new Person("Ibrahim", "Ahmad", "210029073@aston.ac.uk", "+44 7845 087565")
+  );
+  contacts.push(
+    new Person("Lionel", "Muskwe", "leo16@gmail.com", "+44 7564 758592")
+  );
+  console.log(contacts);
+  // localStorage.removeItem("contacts");
+  // localStorage.setItem("contacts", JSON.stringify(contacts));
+  const list_contacts = contacts.map((element) => (
+    <span className="flex flex-col bg-white text-black p-2 rounded-md">
+      <ul>
+        <li className="font-semibold">
+          {element.firstName} {element.lastName}
+        </li>
+        <li>{element.email}</li>
+        <li>{element.phoneNumber}</li>
+      </ul>
+    </span>
+  ));
+  return (
+    <span className="flex flex-row flex-wrap justify-evenly">
+      {list_contacts}
+    </span>
+  );
+}
+
+export default function Contacts() {
   return (
     <>
       <title>Contacts</title>
@@ -15,10 +53,15 @@ export default function About() {
             <strong>This is the Contacts Page.</strong>
           </h1>
         </span>
-        <span className="flex flex-row justify-around flex-wrap">
+        <span className="flex flex-col justify-around flex-wrap">
           <span className="p-1">
             <h2>Content goes here...</h2>
           </span>
+
+          <span className="p-2">
+            <Data />
+          </span>
+
           <span className="p-2">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
