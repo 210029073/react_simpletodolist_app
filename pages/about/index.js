@@ -1,6 +1,7 @@
 import NavBar from "@/components/navbar.js";
-import "../app/layout.js";
+import "../../app/layout.js";
 import { Inter } from "next/font/google";
+import Link from "next/link.js";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,7 +10,7 @@ export default function About() {
     <>
       <title>About</title>
       <NavBar></NavBar>
-      <section className="flex flex-col pl-2">
+      <section className="flex flex-col pl-2 min-h-screen">
         <span className="pt-5">
           <h1 className="text-3xl">
             <strong>This is the About Page.</strong>
@@ -17,7 +18,7 @@ export default function About() {
         </span>
         <span className="pt-2 ">
           <p>
-            To return to homepage please <a href="/">click here</a>
+            To return to homepage please <Link href="/">click here</Link>
           </p>
         </span>
         <span className="flex flex-row justify-around flex-wrap">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "../app/layout";
 
 export default function NavBar() {
@@ -6,10 +7,13 @@ export default function NavBar() {
       <span className="flex flex-row justify-between">
         <span className="flex flex-row">
           <span className="p-3">
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </span>
           <span className="p-3">
-            <a href="/about">About</a>
+            <Link href="/about">About</Link>
+          </span>
+          <span className="p-3">
+            <Link href="/contacts">Contacts</Link>
           </span>
         </span>
         <span className="w-max"></span>

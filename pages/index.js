@@ -1,5 +1,6 @@
 import NavBar from "@/components/navbar";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
             To edit this page. Please visit <strong>app/page.js</strong>
           </p>
           <p>
-            To visit the about page <a href="/about">click here.</a>
+            To visit the about page <Link href="/about">click here.</Link>
           </p>
         </span>
       </main>
