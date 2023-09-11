@@ -23,15 +23,15 @@ function Data() {
   );
   console.log(contacts);
   // localStorage.removeItem("contacts");
-  // localStorage.setItem("contacts", JSON.stringify(contacts));
+  localStorage.setItem("contacts", JSON.stringify(contacts));
   const list_contacts = contacts.map((element) => (
     <span className="flex flex-col bg-white text-black p-2 rounded-md">
       <ul>
-        <li className="font-semibold">
+        <li className="text-xl font-semibold">
           {element.firstName} {element.lastName}
         </li>
-        <li>{element.email}</li>
-        <li>{element.phoneNumber}</li>
+        <li className="text-lg">{element.email}</li>
+        <li className="text-lg">{element.phoneNumber}</li>
       </ul>
     </span>
   ));
