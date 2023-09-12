@@ -1,7 +1,7 @@
 import NavBar from "@/components/navbar.js";
 import "../../app/layout.js";
 import { Inter } from "next/font/google";
-
+import { useEffect, useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 var Person = function (firstName, lastName, email, phoneNumber) {
@@ -22,16 +22,29 @@ function Data() {
     new Person("Lionel", "Muskwe", "leo16@gmail.com", "+44 7564 758592")
   );
   console.log(contacts);
-  // localStorage.removeItem("contacts");
-  localStorage.setItem("contacts", JSON.stringify(contacts));
+  useEffect(() => {
+    localStorage.removeItem("contacts");
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  });
+
   const list_contacts = contacts.map((element) => (
-    <span className="flex flex-col bg-white text-black p-2 rounded-md">
+    <span
+      key={element.email}
+      className="flex flex-col bg-white text-black p-2 rounded-md"
+    >
       <ul>
-        <li className="text-xl font-semibold">
+        <li
+          key={element.firstName + " " + element.lastName}
+          className="text-xl font-semibold"
+        >
           {element.firstName} {element.lastName}
         </li>
-        <li className="text-lg">{element.email}</li>
-        <li className="text-lg">{element.phoneNumber}</li>
+        <li key={element.email} className="text-lg">
+          {element.email}
+        </li>
+        <li key={element.phoneNumber} className="text-lg">
+          {element.phoneNumber}
+        </li>
       </ul>
     </span>
   ));
