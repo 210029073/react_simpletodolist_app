@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0 auto;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .container > #navbar {
+        height: auto;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: black;
+        color: white;
+        padding: 0.25rem;
+      }
+
+      .container > #navbar > a {
+        width: 100%;
+        text-decoration: none;
+        color: white;
+        padding: 0.25rem;
+      }
+
+      .container > #navbar > a > span > p {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      .container > #content {
+        padding: 1rem;
+        width: 100%;
+        height: 1080px;
+      }
+
+      .tooltip {
+        position: absolute;
+        background-color: grey;
+        visibility: hidden;
+        left: 4%;
+        padding: 0.5rem;
+        border-radius: 5px;
+        font-size: smaller;
+      }
+
+      .tooltip::after {
+        content: "  ";
+        top: 50%;
+        right: 100%;
+        position: absolute;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent grey transparent transparent;
+      }
+
+      a:hover .tooltip {
+        visibility: visible;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .inline-flex {
+        display: inline-flex;
+      }
+      .flex-space-between {
+        justify-content: space-between;
+      }
+
+      .navbar-icons-2 {
+        fill: rgb(200, 200, 200);
+      }
+
+      .navbar-icons-2:hover {
+        fill: white;
+      }
+
+      #tasks > div {
+        border-left-style: solid;
+        border-left-color: black;
+        border-left-width: 1rem;
+        background-color: rgba(128, 128, 128, 0.075);
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+      }
+
+      #tasks > div > :first-child p {
+        font-weight: bold;
+      }
+
+      #tasks > div:hover {
+        border-color: rgb(88, 88, 88);
+      }
+
+      #tasksDue > div {
+        border-left-style: solid;
+        border-left-color: darkred;
+        border-left-width: 1rem;
+        background-color: rgb(255, 212, 212);
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+      }
+
+      #tasksDue > div > :first-child p {
+        font-weight: bold;
+      }
+
+      #tasksDue > div:hover {
+        border-color: rgb(201, 60, 60);
+      }
+
+      #btnCloseTasks {
+        width: 7.5rem;
+        height: 2.5rem;
+
+        background-color: black;
+        color: white;
+
+        border-style: solid;
+        border-width: 0.1rem;
+        border-radius: 0.25rem;
+
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        font-weight: bold;
+      }
+
+      .card {
+        height: auto;
+        box-sizing: border-box;
+      }
+
+      #dueStats:hover {
+        background-color: #f0f0f0;
+        border-radius: 5px;
+      }
+
+      #taskStats:hover {
+        background-color: #f0f0f0;
+        border-radius: 5px;
+      }
+
+      #totalNumberOfTasks:hover {
+        background-color: #f0f0f0;
+        border-radius: 5px;
+      }
+
+      .h-100 {
+        height: 100%;
+      }
+
+      @keyframes moveDown {
+        0% {
+          padding-top: 5%;
+        }
+
+        100% {
+          padding-top: 0%;
+        }
+      }
+    </style>
+    <title>To Do List</title>
+    {% load static %}
+    <script
+      type="text/javascript"
+      src="{% static 'todosapp/autoload.js' %}"
+      defer="true"
+    ></script>
+    <link rel="stylesheet" href="{% static 'todosapp/main.css' %}" />
+  </head>
+  <body onscroll="moveStatDown()">
+    <span class="container">
+      <span id="navbar">
+        <a href="/">
+          <span>
+            <p>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="2em"
+                  viewBox="0 0 576 512"
+                  class="navbar-icons-2"
+                >
+                  <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <style>
+                    svg {
+                      fill: #ffffff;
+                    }
+                  </style>
+                  <path
+                    d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"
+                  />
+                </svg>
+              </span>
+              <span class="tooltip">Home</span>
+            </p>
+          </span>
+        </a>
+        <a href="/todosapp">
+          <span>
+            <p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="2em"
+                viewBox="0 0 512 512"
+                class="navbar-icons-2"
+              >
+                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>
+                  svg {
+                    fill: #ffffff;
+                  }
+                </style>
+                <path
+                  d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+                />
+              </svg>
+              <span class="tooltip">View todos</span>
+            </p>
+          </span>
+        </a>
+        <a href="/todosapp/todos/add">
+          <span>
+            <p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="2em"
+                viewBox="0 0 448 512"
+                class="navbar-icons-2"
+              >
+                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                />
+              </svg>
+              <span class="tooltip">Add a task</span>
+            </p>
+          </span>
+        </a>
+      </span>
+      <span id="content">
+        <header>
+          <span>
+            <h1>
+              <strong> ToDoApp - To Do List App </strong>
+            </h1>
+          </span>
+          <span class="flex-center flex-direction-cols">
+            <span>
+              <h2>
+                <strong>Welcome</strong>
+              </h2>
+            </span>
+            <span> <p>Welcome to the beta version of the ToDoApp.</p></span>
+            <span>
+              <p>
+                A simple to do list that is designed for taking notes for task
+                completion purposes, and is capable of setting deadlines to the
+                tasks assigned within a todo list.
+              </p>
+            </span>
+            <span>
+              <p>
+                To get started, simply press the <strong>+</strong> icon on the
+                side navigation to add a new task to the list.
+              </p>
+            </span>
+            <span>
+              <p>
+                To mark a task complete simply go to the todo icon and select
+                the task that you would like to delete, and delete it using the
+                <i>delete</i> button.
+              </p>
+            </span>
+          </span>
+        </header>
+
+        <span>
+          <span>
+            <h2 class="flex flex-space-between">
+              <strong>Tasks that require your attention</strong>
+              <button
+                id="btnCloseTasks"
+                onclick="closeTasks('tasks', 0)"
+                type="button"
+              >
+                Hide
+              </button>
+            </h2>
+          </span>
+
+          <div
+            id="tasks"
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: space-around;
+              flex-wrap: wrap;
+            "
+          ></div>
+          <span>
+            <hr class="hr-1" />
+          </span>
+        </span>
+
+        <span>
+          <h2 class="flex flex-space-between">
+            <strong>Tasks that are now due</strong>
+            <button
+              id="btnCloseTasks"
+              onclick="closeTasks('tasksDue', 1)"
+              type="button"
+            >
+              Hide
+            </button>
+          </h2>
+        </span>
+
+        <div
+          id="tasksDue"
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+          "
+        ></div>
+        <span>
+          <hr class="hr-1" />
+        </span>
+        <span>
+          <span>
+            <h2>
+              <strong> Statistics </strong>
+            </h2>
+          </span>
+          <span>
+            <span>
+              <div
+                id="overallStats"
+                class="flex-center flex-direction-rows flex-space-evenly p-2 h-100"
+              >
+                <span
+                  id="totalNumberOfTasks"
+                  class="card flex-center flex-direction-cols flex-space-evenly p-1 w-25 box-shadow box-curve"
+                >
+                </span>
+                <span
+                  id="taskStats"
+                  class="card flex-center flex-direction-cols flex-space-evenly p-1 w-25 box-shadow box-curve"
+                >
+                </span>
+                <span
+                  id="dueStats"
+                  class="card flex-center flex-direction-cols flex-space-evenly p-1 w-25 box-shadow box-curve"
+                >
+                </span>
+              </div>
+            </span>
+            <hr />
+          </span>
+        </span>
+      </span>
+    </span>
+
+    <script defer>
+      window.onload = () => {
+        initializeData();
+      };
+    </script>
+    <script>
+      let dueTaskQuantity = 0;
+      let nonDueTaskQuantity = 0;
+
+      let tasks = Array.from(JSON.parse(localStorage.getItem("todos")));
+      tasks.forEach((element) => {
+        //perform a check
+        let duedate = new Date(element.duedate);
+        let currentDate = new Date();
+        if (
+          duedate < currentDate ||
+          (duedate.getUTCDate() <= currentDate.getDate() &&
+            duedate.getUTCHours() <= currentDate.getHours() &&
+            duedate.getUTCMinutes() < currentDate.getMinutes())
+        ) {
+          document.querySelector(
+            "#tasksDue"
+          ).innerHTML += `<div class="box-shadow" style="display:flex; flex-wrap: nowrap; flex-direction: column; justify-content:space-between; gap:0.5rem; padding-left:0.25rem; padding-right:0.75rem; margin: 2rem; width: 20%">
+            <div><p style="color:darkred;">${element.title}</p></div>
+            <div><p style="color:darkred; font-size: smaller;">Due on ${new Date(
+              element.duedate
+            ).toUTCString()}</p></div>
+            </div>`;
+          ++dueTaskQuantity;
+        } else {
+          document.querySelector(
+            "#tasks"
+          ).innerHTML += `<div class="box-shadow" style="display:flex; flex-wrap: nowrap; flex-direction: column; justify-content:space-between; gap:0.5rem; margin: 2rem; padding-left:0.25rem; padding-right:0.75rem; width: 20%">
+            <div><p>${element.title}</p></div>
+            <div><p style="font-size: smaller;">Due on ${new Date(
+              element.duedate
+            ).toUTCString()}</p></div>
+            </div>`;
+          ++nonDueTaskQuantity;
+        }
+      });
+      if (dueTaskQuantity > 0) {
+        document.getElementById("dueStats").innerHTML += `
+        <span>Tasks that are <strong>due</strong>, and need your attention.</span>
+        <span>
+          <h1 class="text-xl">
+            <strong>${dueTaskQuantity}</strong>
+            </h1>
+        </span>
+        `;
+      } else {
+        document.getElementById("dueStats").innerHTML += `
+        <span>Tasks that are <strong>due</strong>, and need your attention.</span>
+        <span>
+          <h1 class="text-xl">
+            <strong>0</strong>
+            </h1>
+        </span>
+        `;
+      }
+
+      if (nonDueTaskQuantity > 0) {
+        document.getElementById("taskStats").innerHTML += `
+        <span>Tasks that need your attention, and are <strong>not</strong> due yet.</span>
+        <span>
+          <h1 class="text-xl">
+            <strong>${nonDueTaskQuantity}</strong>
+            </h1>
+        </span>
+        `;
+      } else {
+        document.getElementById("taskStats").innerHTML += `
+        <span>Tasks that need your attention, and are <strong>not</strong> due yet.</span>
+        <span>
+          <h1 class="text-xl">
+            <strong>0</strong>
+            </h1>
+        </span>
+        `;
+      }
+
+      document.getElementById("totalNumberOfTasks").innerHTML += `
+        <span>Total number of tasks.</span>
+        <span>
+          <h1 class="text-xl">
+            <strong>${nonDueTaskQuantity + dueTaskQuantity}</strong>
+            </h1>
+        </span>
+        `;
+
+      const moveStatDown = () => {
+        document.getElementById("overallStats").style.paddingTop = "10%";
+        document.getElementById("overallStats").style.animationName =
+          "moveDown";
+        document.getElementById("overallStats").style.animationDuration = "4s";
+        document.getElementById("overallStats").style.animationFillMode =
+          "forwards";
+      };
+
+      // document.getElementById("taskStats").style.animationName = "moveDown";
+      // document.getElementById("taskStats").style.animationDuration = "4s";
+      // document.getElementById("taskStats").style.animationFillMode = "forwards";
+
+      // document.getElementById("dueStats").style.animationName = "moveDown";
+      // document.getElementById("dueStats").style.animationDuration = "4s";
+      // document.getElementById("dueStats").style.animationFillMode = "forwards";
+
+      function closeTasks(element, index) {
+        if (document.getElementById(element).style.display == "none") {
+          document.getElementById(element).style.display = "flex";
+          document.querySelectorAll(`button#btnCloseTasks`)[index].textContent =
+            "Hide";
+        } else {
+          document.getElementById(element).style.display = "none";
+          document.querySelectorAll(`button#btnCloseTasks`)[index].textContent =
+            "Show";
+        }
+      }
+    </script>
+  </body>
+</html>
