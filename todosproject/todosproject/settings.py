@@ -31,6 +31,7 @@ CORS_ORIGIN_ALLOW_ALLOW = False
 
 CORS_ALLOWED_ORIGINS = (
     'https://127.0.0.1:8000',
+    'http://localhost:3000'
 )
 
 

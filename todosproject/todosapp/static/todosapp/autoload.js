@@ -11,16 +11,16 @@ var parsed_data = []; //hold processed data from json
  */
 async function fetchData() {
   const response = await fetch(data, { method: "GET" });
-
+  
   output = await response.json();
   //store results in localstorage
-
+  
   //check if it exists in localstorage
   //remove if it already exists
   if (localStorage.getItem("todos") != null) {
     localStorage.removeItem("todos"); //remove from localstorage
   }
-
+  
   //otherwise set
   localStorage.setItem("todos", JSON.stringify(output));
   parsed_data = Array.from(output);

@@ -13,7 +13,7 @@ export default function NavBar() {
             <Link href="/about">About</Link>
           </span>
           <span className="p-3">
-            <Link href="/contacts">Contacts</Link>
+            <Link href="/contacts">Todos</Link>
           </span>
         </span>
         <span className="w-max"></span>

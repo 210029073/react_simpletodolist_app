@@ -13,6 +13,37 @@ var Person = function (firstName, lastName, email, phoneNumber) {
 
 var contacts = [];
 
+var data = "https://127.0.0.1:8000/todosapp/todos/data"; //url for making api request to get data
+
+var output = []; //holding the response in json
+
+var parsed_data = []; //hold processed data from json
+
+/**
+ * This will make an asynchronous web api call using fetch to retrieve all items that
+ * are part of the todo list.
+ *
+ * @author Ibrahim Ahmad
+ */
+async function fetchData() {
+  const response = await fetch(data, { method: "GET" });
+
+  output = await response.json();
+  //store results in localstorage
+
+  //check if it exists in localstorage
+  //remove if it already exists
+  if (localStorage.getItem("todos") != null) {
+    localStorage.removeItem("todos"); //remove from localstorage
+  }
+
+  //otherwise set
+  localStorage.setItem("todos", JSON.stringify(output));
+  parsed_data = Array.from(output);
+  console.log(parsed_data);
+  return parsed_data;
+}
+
 function Data() {
   contacts = [];
   contacts.push(
@@ -55,15 +86,16 @@ function Data() {
   );
 }
 
-export default function Contacts() {
+export default function Todos() {
+  output = fetchData();
   return (
     <>
-      <title>Contacts</title>
+      <title>Todos</title>
       <NavBar></NavBar>
       <section className="flex flex-col pl-2 min-h-screen">
         <span className="pt-5">
           <h1 className="text-3xl">
-            <strong>This is the Contacts Page.</strong>
+            <strong>This is the Todos Page.</strong>
           </h1>
         </span>
         <span className="flex flex-col justify-around flex-wrap">
