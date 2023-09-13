@@ -58,23 +58,20 @@ function Data() {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   });
 
-  const list_contacts = contacts.map((element) => (
+  const list_contacts = parsed_data.map((element) => (
     <span
-      key={element.email}
+      key={element.todos_id}
       className="flex flex-col bg-white text-black p-2 rounded-md"
     >
       <ul>
-        <li
-          key={element.firstName + " " + element.lastName}
-          className="text-xl font-semibold"
-        >
-          {element.firstName} {element.lastName}
+        <li key={element.todos_id} className="text-xl font-semibold">
+          {element.todos_id}
         </li>
-        <li key={element.email} className="text-lg">
-          {element.email}
+        <li key={element.title} className="text-lg">
+          {element.title}
         </li>
-        <li key={element.phoneNumber} className="text-lg">
-          {element.phoneNumber}
+        <li key={element.startdate} className="text-lg">
+          {element.startdate}
         </li>
       </ul>
     </span>
@@ -87,7 +84,8 @@ function Data() {
 }
 
 export default function Todos() {
-  output = fetchData();
+  fetchData();
+  parsed_data = Array.from(JSON.parse(localStorage.getItem("todos")));
   return (
     <>
       <title>Todos</title>
