@@ -44,6 +44,10 @@ async function fetchData() {
   return parsed_data;
 }
 
+function parseDate(date) {
+  return new Date(date).toUTCString();
+}
+
 function Data() {
   contacts = [];
   contacts.push(
@@ -71,7 +75,10 @@ function Data() {
           {element.title}
         </li>
         <li key={element.startdate} className="text-lg">
-          {element.startdate}
+          {parseDate(element.startdate)}
+        </li>
+        <li key={element.duedate} className="text-lg">
+          {parseDate(element.duedate)}
         </li>
       </ul>
     </span>
@@ -85,7 +92,13 @@ function Data() {
 
 export default function Todos() {
   fetchData();
-  parsed_data = Array.from(JSON.parse(localStorage.getItem("todos")));
+
+  // if (typeof window != undefined && typeof localStorage != undefined) {
+  useEffect(() => {
+    parsed_data = Array.from(JSON.parse(localStorage.getItem("todos")));
+  }, fetchData());
+  // }
+
   return (
     <>
       <title>Todos</title>
