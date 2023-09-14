@@ -17,7 +17,7 @@ var data = "https://127.0.0.1:8000/todosapp/todos/data"; //url for making api re
 
 var output = []; //holding the response in json
 
-var parsed_data = []; //hold processed data from json
+var parsed_data; //hold processed data from json
 
 /**
  * This will make an asynchronous web api call using fetch to retrieve all items that
@@ -62,7 +62,15 @@ function Data() {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   });
 
-  const list_contacts = parsed_data.map((element) => (
+  let [parsed, setParsedData] = useState([]);
+  // if (typeof window != undefined && typeof localStorage != undefined) {
+  useEffect(() => {
+    setParsedData(Array.from(JSON.parse(localStorage.getItem("todos"))));
+    console.log("Data => ", parsed_data);
+  }, [parsed_data]);
+  // }
+
+  const list_contacts = parsed.map((element) => (
     <span
       key={element.todos_id}
       className="flex flex-col bg-white text-black p-2 rounded-md"
@@ -92,12 +100,6 @@ function Data() {
 
 export default function Todos() {
   fetchData();
-
-  // if (typeof window != undefined && typeof localStorage != undefined) {
-  useEffect(() => {
-    parsed_data = Array.from(JSON.parse(localStorage.getItem("todos")));
-  }, fetchData());
-  // }
 
   return (
     <>
