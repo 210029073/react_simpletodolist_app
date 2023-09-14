@@ -100,6 +100,33 @@ function Data() {
   );
 }
 
+function submitName(event) {
+  const formData = event.currentTarget; //this will retrieve the form via the event
+
+  //test
+  //shows an alert prompt if data successfully passes in form
+  const msg = `Basic Description of the Task\nTitle of Task:\n${formData.elements.title.value}\nStart Date:\n${formData.elements.startdate.value}\nDue Date:\n${formData.elements.duedate.value}`;
+  alert(msg);
+}
+
+function AddForm() {
+  return (
+    <>
+      <form onSubmit={submitName}>
+        <textarea
+          className="text-black"
+          placeholder="Please state the name of the task"
+          name="title"
+        ></textarea>
+        <input className="text-black" type="datetime-local" name="startdate" />
+        <input className="text-black" type="datetime-local" name="duedate" />
+
+        <button type="submit">Submit</button>
+      </form>
+    </>
+  );
+}
+
 export default function Todos() {
   fetchData();
 
@@ -116,6 +143,10 @@ export default function Todos() {
         <span className="flex flex-col justify-around flex-wrap">
           <span className="p-2">
             <Data />
+          </span>
+
+          <span className="p-2">
+            <AddForm />
           </span>
 
           <span className="p-1">
