@@ -102,11 +102,16 @@ function Data() {
 
 function submitName(event) {
   const formData = event.currentTarget; //this will retrieve the form via the event
-
+  // const candidate_task = new ToDo(
+  //   formData.elements.title.value,
+  //   formData.elements.startdate.value,
+  //   formData.elements.duedate.value
+  // );
   //test
   //shows an alert prompt if data successfully passes in form
   const msg = `Basic Description of the Task\nTitle of Task:\n${formData.elements.title.value}\nStart Date:\n${formData.elements.startdate.value}\nDue Date:\n${formData.elements.duedate.value}`;
   alert(msg);
+  // localStorage.setItem("candidate_task", JSON.stringify(candidate_task));
 }
 
 function AddForm() {
