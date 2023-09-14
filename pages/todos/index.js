@@ -73,26 +73,28 @@ function Data() {
   const list_contacts = parsed.map((element) => (
     <span
       key={element.todos_id}
-      className="flex flex-col bg-white text-black p-2 rounded-md"
+      className="flex flex-col justify-between w-1/4 max-h-min h-fit bg-white text-black p-2 rounded-md"
     >
-      <ul>
-        <li key={element.todos_id} className="text-xl font-semibold">
-          {element.todos_id}
+      <ul className="flex flex-col gap-3">
+        <li key={element.todos_id} className="text-base font-semibold">
+          Task <strong>{element.todos_id}</strong>
         </li>
-        <li key={element.title} className="text-lg">
-          {element.title}
+        <li key={element.title} className="text-xl">
+          <h2>
+            <strong>{element.title}</strong>
+          </h2>
         </li>
-        <li key={element.startdate} className="text-lg">
-          {parseDate(element.startdate)}
+        <li key={element.startdate} className="text-sm">
+          <strong>From:</strong> {parseDate(element.startdate)}
         </li>
-        <li key={element.duedate} className="text-lg">
-          {parseDate(element.duedate)}
+        <li key={element.duedate} className="text-sm">
+          <strong>To:</strong> {parseDate(element.duedate)}
         </li>
       </ul>
     </span>
   ));
   return (
-    <span className="flex flex-row flex-wrap justify-evenly">
+    <span className="flex flex-row flex-wrap justify-evenly  gap-x-2 gap-y-8">
       {list_contacts}
     </span>
   );
@@ -105,19 +107,19 @@ export default function Todos() {
     <>
       <title>Todos</title>
       <NavBar></NavBar>
-      <section className="flex flex-col pl-2 min-h-screen">
-        <span className="pt-5">
+      <section className="inline-flex flex-col pl-2 min-h-screen">
+        <span className="pt-5 flex flex-row justify-center">
           <h1 className="text-3xl">
-            <strong>This is the Todos Page.</strong>
+            <strong>Viewing all tasks in the todo list.</strong>
           </h1>
         </span>
         <span className="flex flex-col justify-around flex-wrap">
-          <span className="p-1">
-            <h2>Content goes here...</h2>
-          </span>
-
           <span className="p-2">
             <Data />
+          </span>
+
+          <span className="p-1">
+            <h2>Content goes here...</h2>
           </span>
 
           <span className="p-2">
