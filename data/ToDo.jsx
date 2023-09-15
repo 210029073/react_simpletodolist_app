@@ -7,6 +7,12 @@ class ToDo {
     this.dueDate = new Date(dueDate);
   }
 
+  constructor() {
+    this.title = "";
+    this.startDate = new Date();
+    this.dueDate = new Date();
+  }
+
   startDateToUTCTimeString() {
     this.startDate.toUTCString();
   }

@@ -2,6 +2,7 @@ import NavBar from "@/components/navbar.js";
 import "../../app/layout.js";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
+
 const inter = Inter({ subsets: ["latin"] });
 
 var Person = function (firstName, lastName, email, phoneNumber) {
@@ -100,24 +101,57 @@ function Data() {
   );
 }
 
-function submitName(event) {
-  const formData = event.currentTarget; //this will retrieve the form via the event
-  // const candidate_task = new ToDo(
-  //   formData.elements.title.value,
-  //   formData.elements.startdate.value,
-  //   formData.elements.duedate.value
-  // );
+function submitName() {
+  // const formData = event.currentTarget; //this will retrieve the form via the event
+  // let [task, setTask] = useState(new ToDo());
+
+  // useEffect(() => {
+  //make the api call
+  fetch("https://127.0.0.1:8000/todosapp/todos/add/payload", {
+    method: "POST", //updating partial model using patch
+    headers: {
+      // "X-CSRFToken": token, //may require for security reasons
+      "Content-Type": "application/json; charset=utf-8", //to tell server we are working with json, and utf-8.
+    },
+    body: JSON.stringify({
+      title: document.getElementById("todo").elements.title.value,
+      startdate: document.getElementById("todo").elements.startdate.value,
+      duedate: document.getElementById("todo").elements.duedate.value,
+    }), //the clients request holding data will be sent to the server to handle request
+  });
+  // });
+
+  // addToDo(candidate_task);
+
   //test
   //shows an alert prompt if data successfully passes in form
-  const msg = `Basic Description of the Task\nTitle of Task:\n${formData.elements.title.value}\nStart Date:\n${formData.elements.startdate.value}\nDue Date:\n${formData.elements.duedate.value}`;
-  alert(msg);
+  // const msg = `Basic Description of the Task\nTitle of Task:\n${
+  //   document.getElementById("todo").elements.title.value
+  // }\nStart Date:\n${
+  //   document.getElementById("todo").elements.startdate.value
+  // }\nDue Date:\n${document.getElementById("todo").elements.duedate.value}`;
+  // alert(msg);
   // localStorage.setItem("candidate_task", JSON.stringify(candidate_task));
+}
+
+function addToDo(candidate_task) {
+  useEffect(() => {
+    //make the api call
+    fetch("https://127.0.0.1:8000/todosapp/todos/add/payload", {
+      method: "POST", //updating partial model using patch
+      headers: {
+        "X-CSRFToken": token, //may require for security reasons
+        "Content-Type": "application/json; charset=utf-8", //to tell server we are working with json, and utf-8.
+      },
+      body: candidate_task, //the clients request holding data will be sent to the server to handle request
+    });
+  });
 }
 
 function AddForm() {
   return (
     <>
-      <form onSubmit={submitName}>
+      <form id="todo">
         <textarea
           className="text-black"
           placeholder="Please state the name of the task"
@@ -126,7 +160,9 @@ function AddForm() {
         <input className="text-black" type="datetime-local" name="startdate" />
         <input className="text-black" type="datetime-local" name="duedate" />
 
-        <button type="submit">Submit</button>
+        <button type="button" onClick={submitName}>
+          Submit
+        </button>
       </form>
     </>
   );

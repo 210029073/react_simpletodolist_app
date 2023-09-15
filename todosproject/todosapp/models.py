@@ -9,4 +9,10 @@ class ToDo(models.Model, json.JSONEncoder):
     startdate = models.DateTimeField("start date")
     duedate = models.DateTimeField("due date")
 
+class ToDoNoID(json.JSONEncoder):
+    # todos_id = models.IntegerField(primary_key=True, auto_created=True, serialize=False, default=None)
+    title = ""
+    startdate = datetime
+    duedate = datetime
+
     

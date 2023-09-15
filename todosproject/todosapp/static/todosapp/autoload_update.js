@@ -59,7 +59,7 @@ async function updateRecordsInTextChange() {
     },
     body: data, //the clients request holding data will be sent to the server to handle request
   });
-
+  
   //destroy pending task in storage
   destroy();
 

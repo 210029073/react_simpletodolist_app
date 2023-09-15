@@ -6,7 +6,7 @@ from datetime import datetime
 from .forms import ToDoForm
 from .models import ToDo
 import json
-from django.views.decorators.csrf import requires_csrf_token, ensure_csrf_cookie
+from django.views.decorators.csrf import requires_csrf_token, ensure_csrf_cookie, csrf_exempt
 # Create your views here.
 author = "Ibrahim Ahmad"
 todos = ["Make coffee", "Use R to aggregate data for data analysis", 
@@ -59,6 +59,15 @@ def add(request):
     else:
         form = ToDoForm()
     return render(request, "todosapp/add_task.html" ,{"form": form})
+
+@csrf_exempt
+def add_payload(request):
+    if request.method == "POST":
+        print("test")
+        print(json.loads(request.body))
+        return HttpResponse('Success', status=200)
+    else:
+        return HttpResponse('Unauthorized', status=401)
 
 """ 
 This will simply return the name of the app.
