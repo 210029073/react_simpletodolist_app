@@ -64,7 +64,9 @@ def add(request):
 def add_payload(request):
     if request.method == "POST":
         print("test")
-        print(json.loads(request.body))
+        obj = json.loads(request.body)
+        todo = ToDo(title=obj['title'], startdate=obj['startdate'], duedate=obj['duedate'])
+        todo.save()
         return HttpResponse('Success', status=200)
     else:
         return HttpResponse('Unauthorized', status=401)
