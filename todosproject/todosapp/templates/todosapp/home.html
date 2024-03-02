@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style></style>
+    <title>To Do List</title>
+    {% load static %}
+    <script
+      type="text/javascript"
+      src="{% static 'todosapp/autoload.js' %}"
+      defer="true"
+    ></script>
+    <link rel="stylesheet" href="{% static 'todosapp/main.css' %}" />
+  </head>
+  <body>
+    <span class="container">
+      <span id="navbar">
+        <a href="/">
+          <span>
+            <p>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="2em"
+                  viewBox="0 0 576 512"
+                  class="navbar-icons-2"
+                >
+                  <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <style>
+                    svg {
+                      fill: #ffffff;
+                    }
+                  </style>
+                  <path
+                    d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"
+                  />
+                </svg>
+              </span>
+              <span class="tooltip">Home</span>
+            </p>
+          </span>
+        </a>
+        <a href="/todosapp">
+          <span>
+            <p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="2em"
+                viewBox="0 0 512 512"
+                class="navbar-icons-2"
+              >
+                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <style>
+                  svg {
+                    fill: #ffffff;
+                  }
+                </style>
+                <path
+                  d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+                />
+              </svg>
+              <span class="tooltip">View todos</span>
+            </p>
+          </span>
+        </a>
+        <a href="/todosapp/todos/add">
+          <span>
+            <p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="2em"
+                viewBox="0 0 448 512"
+                class="navbar-icons-2"
+              >
+                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                />
+              </svg>
+              <span class="tooltip">Add a task</span>
+            </p>
+          </span>
+        </a>
+      </span>
+      <span id="content">
+        <header>
+          <span>
+            <h1>
+              <strong> ToDoApp </strong>
+            </h1>
+          </span>
+          <span>
+            <p>To add a form <a href="todos/add">click here.</a></p>
+          </span>
+        </header>
+        <!-- Demonstrates how data can be passed -->
+        <section>
+          <!-- Please remove {% if False %} {% endif %} to see the effects -->
+          {% if False %}
+          <span>
+            <p>Author:</p>
+            <span>
+              <p>
+                <strong> {{ name }} </strong>
+              </p>
+            </span>
+          </span>
+        </section>
+        <!-- Demonstrates conditional statements -->
+        {% if name == "Ibrahim Ahmad" %}
+        <p>Owner</p>
+        {% else %}
+        <p>Not Owner</p>
+        {% endif %} {% endif %}
+        <!-- This is the one that should be removed -->
+        <section>
+          <span>
+            <h2>
+              <strong>List of pending tasks</strong>
+            </h2>
+          </span>
+          <span id="quantityMessage"> </span>
+          <span> </span>
+        </section>
+
+        <section id="list">{{csrf_token}}</section>
+      </span>
+    </span>
+
+    <script defer="true">
+      window.onload = () => {
+        initialize();
+      };
+    </script>
+  </body>
+</html>

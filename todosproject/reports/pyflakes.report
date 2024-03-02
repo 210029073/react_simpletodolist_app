@@ -1,0 +1,38 @@
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\messages\__init__.py:1:1: [E] PYFLAKES:'from django.contrib.messages.api import *' used; unable to detect undefined names
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\messages\__init__.py:1:1: [E] PYFLAKES:'django.contrib.messages.api.*' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\messages\__init__.py:2:1: [E] PYFLAKES:'from django.contrib.messages.constants import *' used; unable to detect undefined names
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\messages\__init__.py:2:1: [E] PYFLAKES:'django.contrib.messages.constants.*' imported but unused
+todosapp\admin.py:1:1: [E] PYFLAKES:'django.contrib.admin' imported but unused
+todosapp\models.py:1:1: [E] PYFLAKES:'typing.Any' imported but unused
+todosapp\models.py:3:1: [E] PYFLAKES:'datetime.datetime' imported but unused
+todosapp\tests.py:1:1: [E] PYFLAKES:'django.test.TestCase' imported but unused
+todosapp\views.py:2:1: [E] PYFLAKES:'django.shortcuts.get_object_or_404' imported but unused
+todosapp\views.py:5:1: [E] PYFLAKES:'datetime.datetime' imported but unused
+todosapp\views.py:9:1: [E] PYFLAKES:'django.views.decorators.csrf.requires_csrf_token' imported but unused
+todosapp\views.py:38:5: [E] PYFLAKES:local variable 'page' is assigned to but never used
+todosapp\views.py:74:9: [E] PYFLAKES:undefined name 'date'
+todosapp\migrations\0003_alter_todo_duedate_alter_todo_startdate.py:4:1: [E] PYFLAKES:'..models.ToDo' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\collision_resolvers.py:5:1: [E] PYFLAKES:'typing.Dict' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\collision_resolvers.py:5:1: [E] PYFLAKES:'typing.List' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\collision_resolvers.py:5:1: [E] PYFLAKES:'typing.Optional' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\collision_resolvers.py:5:1: [E] PYFLAKES:'typing.Tuple' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\import_subclasses.py:8:1: [E] PYFLAKES:'typing.Dict' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\import_subclasses.py:8:1: [E] PYFLAKES:'typing.List' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\import_subclasses.py:8:1: [E] PYFLAKES:'typing.Tuple' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\import_subclasses.py:8:1: [E] PYFLAKES:'typing.Union' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\admin\__init__.py:7:1: [E] PYFLAKES:'typing.Tuple' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\admin\__init__.py:7:1: [E] PYFLAKES:'typing.Dict' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\admin\__init__.py:7:1: [E] PYFLAKES:'typing.Callable' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\shells.py:7:1: [E] PYFLAKES:'typing.Dict' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\shells.py:7:1: [E] PYFLAKES:'typing.List' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\shells.py:7:1: [E] PYFLAKES:'typing.Tuple' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\shells.py:7:1: [E] PYFLAKES:'typing.Union' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\utils.py:70:9: [E] PYFLAKES:'ipdb' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\utils.py:71:9: [E] PYFLAKES:'IPython' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\commands\runserver_plus.py:44:5: [E] PYFLAKES:'OpenSSL' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\commands\sqldiff.py:27:1: [E] PYFLAKES:'typing.Dict' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\commands\sqldiff.py:27:1: [E] PYFLAKES:'typing.Union' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\commands\sqldiff.py:27:1: [E] PYFLAKES:'typing.Callable' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\commands\sqldiff.py:27:1: [E] PYFLAKES:'typing.Optional' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\management\commands\sync_s3.py:65:1: [E] PYFLAKES:'typing.List' imported but unused
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_extensions\utils\__init__.py:2:1: [E] PYFLAKES:'.internal_ips.InternalIPS' imported but unused
